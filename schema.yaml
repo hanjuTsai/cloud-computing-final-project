@@ -1,0 +1,228 @@
+---
+swagger: "2.0"
+info:
+  description: "AI Customer Service application, built during the Cloud and Big Data\
+    \ course at Columbia University."
+  version: "1.0.0"
+  title: "AI Customer Service API"
+host: "sybtn46og6.execute-api.us-east-1.amazonaws.com"
+basePath: "/dev"
+schemes:
+- "https"
+
+paths:
+  /register:
+    post:
+      tags:
+      - "user"
+      summary: "register"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Check if email/name already exist"
+        required: true
+        schema:
+          $ref: "#/definitions/Register"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /login:
+    post:
+      tags:
+      - "user"
+      summary: "register"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Check if email exist and the password matched"
+        required: true
+        schema:
+          $ref: "#/definitions/Login"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /search:
+    get:
+      tags:
+        - "restaurants"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      # TODO: query text
+        - in: query
+          name: price_level
+          type: string
+        
+        - in: query
+          name: cuisine
+          type: string
+          
+        - in: query
+          name: rating
+          type: string
+          
+      responses:
+        "200":
+          description: "200 responses"
+          schema:
+             $ref: "#/definitions/DefaultResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+  /favorite_list:
+    get:
+      tags:
+        - "favorite_list"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in : query
+          name: list_name
+          type: string
+      responses:
+        "200":
+          description: "200 responses"
+          schema:
+             $ref: "#/definitions/Restaurants"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+    put:
+      tags: 
+        - "favorite_list"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Add restaurants into a favorite list."
+        required: true
+        schema:
+          $ref: "#/definitions/AddToFavoriteList"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
+definitions:
+  DefaultResponse:
+    type: "object"
+    properties:
+      statusCode:
+        type: "integer"
+        format: "int64"
+      message:
+        type: "string"
+        format: "string"
+
+  Restaurants:
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+        photo_url:
+          type: "string"
+        address:
+          type: "string"
+        name:
+          type: "string"
+        phone_number:
+          type: "string"
+        rating:
+          type: "number"
+          format: "float"
+        price:
+          type: "string"
+          
+  Register:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      password:
+        type: "string"
+      name:
+        type: "string"
+        
+  Login:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      password:
+        type: "string"
+        
+  AddToFavoriteList:
+    type: "object"
+    properties:
+      is_private:
+        type: "boolean"
+      list_name:
+        type: "string"
+      restaurant_id:
+        type: "array"
+        items:
+          type: "integer"
+  
+  AddViewersToFavoriteList:
+    type: "object"
+    properties:
+      list_name:
+        type: "string"
+      viewers:
+        type: "array"
+        items:
+          type: "string"
+          format: "email"
+  
