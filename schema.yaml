@@ -153,6 +153,34 @@ paths:
               type: "string"
             Access-Control-Allow-Headers:
               type: "string"
+              
+  /favorite_list/viewers:
+    put:
+      tags: 
+      - "favorites_list_viewers"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Add viewers and give them access to view the designated favorite list."
+        required: true
+        schema:
+          $ref: "#/definitions/AddViewersToFavoriteList"
+      responses:
+        "200":
+          description: "200 response"
+          schema:
+            $ref: "#/definitions/DefaultResponse"
+          headers:
+            Access-Control-Allow-Origin:
+              type: "string"
+            Access-Control-Allow-Methods:
+              type: "string"
+            Access-Control-Allow-Headers:
+              type: "string"
 definitions:
   DefaultResponse:
     type: "object"
