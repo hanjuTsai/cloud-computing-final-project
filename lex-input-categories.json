@@ -5,8 +5,6 @@
     "importFormat": "JSON"
   },
   "resource": {
-    "name": "RestaurantCategories",
-    "description": "Around 200 different types of cuisine categories.",
     "enumerationValues": [
       { "value": "afghani" },
       { "value": "african" },
@@ -202,6 +200,8 @@
       { "value": "wok" },
       { "value": "wraps" },
       { "value": "yugoslav" }
-    ]
+    ],
+    "name": "RestaurantCategories",
+    "description": "Around 200 different types of cuisine categories."
   }
 }
