@@ -15,12 +15,18 @@ def lambda_handler(event, context):
     table_name = 'favorite-list'
     
     #check did the user have favorite list, is not create it
+    
     create_dynamalDB(uid, table_name)
     update_dynomalDB(uid, rid, table_name)
     
     return {
         'statusCode': 200,
-        'body': json.dumps("success")
+        'body': json.dumps("success"),
+        'headers': {
+            'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,access_token',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,POST,PUT,OPTIONS',
+        },
     }
 
 
