@@ -27,7 +27,7 @@ def lambda_handler(event, context):
         detail_list = ridList_to_detailList(favorite_list['rid_list'])
         follow_favorite_list[followed_uid] = detail_list
     
-    print(f"{uid}'s favorite list (rid_list):", favorite_list['rid_list'])
+        print(f"{uid}'s favorite list (rid_list):", favorite_list['rid_list'])
     
     return {
         'statusCode': 200,
@@ -72,6 +72,9 @@ def get_favorite_list(uid, table, db=None):
     
     data = table.get_item(Key = {'uid':uid})
     
+    if 'Item' not in data:
+        return []
+
     return data['Item']
 
     
@@ -125,4 +128,3 @@ def get_follow_uid_list(uid, table, db=None):
         response = table.get_item(Key = {'uid':uid})
         
     return response['Item']['following_uid_list']
-
