@@ -20,7 +20,7 @@ def lambda_handler(event, context):
         'headers': {
             'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,access_token',
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,POST,PUT,OPTIONS',
+            'Access-Control-Allow-Methods': 'GET,POST,PUT,OPTIONS,DELETE',
         },
     }
 
