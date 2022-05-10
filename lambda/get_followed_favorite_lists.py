@@ -19,7 +19,7 @@ def lambda_handler(event, context):
     
     follow_favorite_list = dict()
     
-    for followed_uid in follow_uid_list:
+    for followed_uid in follow_uid_list + [uid]:
         
         #check the user have favorite list or not, is not create it
         create_dynamalDB(followed_uid, table_name)
@@ -28,6 +28,9 @@ def lambda_handler(event, context):
         follow_favorite_list[followed_uid] = detail_list
     
         print(f"{uid}'s favorite list (rid_list):", favorite_list['rid_list'])
+    
+    follow_favorite_list['My favorites'] = follow_favorite_list[uid]
+    del follow_favorite_list[uid]
     
     return {
         'statusCode': 200,
